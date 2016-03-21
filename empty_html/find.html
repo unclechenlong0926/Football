@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>个人中心</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/hot.css" />
+		<style type="text/css">
+			header {
+				text-align: center;
+				line-height: 37px;
+				margin-bottom: 0;
+			}
+			
+			header span {
+				font-size: 16px;
+				color: #fff;
+			}
+			
+			.nav span:nth-child(1) {
+				color: #0f91c5;
+				border-bottom: 2px solid #0f91c5;
+			}
+			
+			.search {
+				width: 100%;
+				height: 35px;
+				background: #fff;
+				margin-bottom: 5px;
+				text-align: center;
+				line-height: 35px;
+			}
+			
+			.search input:nth-child(1) {
+				width: 80%;
+				height: 24px;
+				outline: none;
+				text-indent: 10px;
+				border: 1px solid #333;
+				border-radius: 5px;
+			}
+			
+			.search input:nth-child(2) {
+				margin-left: 10px;
+				width: 10%;
+				height: 24px;
+				background: #0f91c5;
+				text-align: center;
+				line-height: 24px;
+				color: #fff;
+				border-radius: 5px;
+			}
+			
+			#wrapper {
+				background: #fff;
+			}
+			
+			dl {
+				width: 100%;
+				overflow: hidden;
+				position: relative;
+			}
+			
+			dl button {
+				position: absolute;
+				right: 10%;
+				top: 15px;
+				color: #ccc;
+			}
+			
+			.active3 {
+				background: red;
+				color: #fff;
+			}
+			
+			dt,
+			dd {
+				float: left;
+			}
+			
+			dt {
+				width: 20%;
+			}
+			
+			.page1 dt img {
+				width: 70%;
+				margin: 10px auto;
+				border-radius: 50%;
+			}
+			
+			dd {
+				width: 80%;
+				margin: 10px 0;
+			}
+			
+			.page1 dd p {
+				font-size: 14px;
+				line-height: 24px;
+				text-align: left;
+			}
+			
+			dd p:nth-child(1) {
+				overflow: hidden;
+			}
+			
+			dd p:nth-child(2) {
+				color: #cfcfcf;
+			}
+			
+			.nav {
+				border-bottom: 2px solid #ccc;
+			}
+			.active3{
+				background: red;
+				color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<span>发现</span>
+		</header>
+		<div class="search">
+			<input type="text" id="search" placeholder="请输入昵称" />
+			<input type="button" name="" id="btn" value="搜索" />
+		</div>
+		<div id="wrapper">
+			<div id="scroller" class="page1">
+				<!--<dl>
+					<dt><img src="http://localhost:8080/Proxy/FootBall/user/json/queryall.do/upload/files/20150823/b40cf9dc-c17e-4f9f-94c7-26a4c4688f47.png"/></dt>
+					<dd>
+						<p><span>我叫小萌</span></p>
+						<p>我是小萌我怕谁!哈哈哈!</p>
+					</dd>
+				</dl>-->
+			</div>
+		</div>
+		<footer>
+			<a href="javascript:;">
+				<span class="iconfont">&#x3436;</span>
+				<br>
+				<span>首页</span>
+			</a>
+			<a class="active" href="javascript:;">
+				<span class="iconfont">&#xe649;</span>
+				<br>
+				<span>发现</span>
+			</a>
+			<a href="javascript:;">
+				<span class="iconfont">&#xe60e;</span>
+			</a>
+			<a href="javascript:;">
+				<span class="iconfont">&#xe64c;</span>
+				<br>
+				<span>我的</span>
+			</a>
+			<a href="javascript:;">
+				<span class="iconfont">&#xe638;</span>
+				<br>
+				<span>退出</span>
+			</a>
+
+		</footer>
+	</body>
+	<script src="js/jquery-1.11.3.js"></script>
+	<script src="js/iscroll.js"></script>
+	<script type="text/javascript">
+		window.onload = function() {
+			var wHeight = $(window).height(),
+				hHeight = $("header").height(),
+				nHeight = $(".search").height(),
+				fHeight = $("footer").height(),
+				scroll = new iScroll("wrapper", {
+					hScrollbar: false,
+					vScrollbar: false,
+					/*whellbar:true*/
+				});
+			$("#wrapper").height(wHeight - hHeight - fHeight - nHeight - 6);
+			scroll.refresh();
+			//点击搜索
+			var page = 1;
+			$('#btn').click(function() {
+				var value = $('#search').val();
+				$.ajax({
+					url: 'http://10.10.160.44:8080/Proxy/FootBall/user/json/queryall.do',
+					data: {
+						/*'keyword': value,
+						'loginsuserid':localStorage.getItem('id'),*/
+						'page.pageNo':page
+					},
+					success: function(d) {
+						var data = JSON.parse(d);
+						page++;
+						$.each(data.data.userlist, function(i) {
+							var dt = $('<dt><img src="http://101.200.173.217:8080/FootBall' + data.data.userlist[i].avatarpath + '"/></dt>');
+							var dd = $('<dd>');
+							var btn = $('<button>关注</button>');
+							btn.addClass('btn');
+							btn.addClass('active3');
+							var dd1 = $('<p><span>' + data.data.userlist[i].nickname + '</span></p>');
+							var dd2 = $('<p>' + data.data.userlist[i].signnature + '</p>')
+							var dl = $('<dl>');
+							dd.append(dd1);
+							dd.append(dd2);
+							dl.append(btn);
+							dl.append(dt);
+							dl.append(dd);
+							$('.page1').append(dl);
+						});
+						scroll.refresh();
+						$('dl').click(function(event) {
+							var $target = $(event.target);
+							if ($target.is('.btn')) {
+								var index = $(this).index();
+								$(this).find('button').removeClass('active3');
+								var seeid = data.data.userlist[index].id;
+								localStorage.setItem('seeid', data.data.userlist[index].id);
+								var ID = localStorage.getItem('id');
+								console.log(index);
+								$.ajax({
+									type: "get",
+									url: "http://10.10.160.44:8080/Proxy/FootBall/attention/json/follow.do",
+									data: {
+										'loginsuserid': ID,
+										'tagetuserid': seeid,
+									},
+									success: function(b) {
+										var dataa = JSON.parse(b);
+										console.log(dataa);
+									}
+								});
+							}
+						})
+					}
+				})
+			})
+		}
+	</script>
+
+</html>

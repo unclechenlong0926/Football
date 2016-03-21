@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>个人中心</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/hot.css" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/animate.css" />
+		<link rel="stylesheet" type="text/css" href="css/swiper-3.3.1.min.css" />
+		<style type="text/css">
+			header {
+				text-align: center;
+				line-height: 37px;
+				margin-bottom: 0;
+			}
+			
+			header span {
+				font-size: 16px;
+				color: #fff;
+			}
+			
+			.search {
+				width: 100%;
+				height: 35px;
+				background: #fff;
+				margin-bottom: 5px;
+				text-align: center;
+				line-height: 35px;
+			}
+			.search input:nth-child(1){
+				width: 80%;
+				height: 24px;
+				outline: none;
+				text-indent: 10px;
+				border: 1px solid #333;
+				border-radius: 5px;
+			}
+			.search input:nth-child(2){
+				margin-left: 10px;
+				width: 10%;
+				height: 24px;
+				background: #0f91c5;
+				text-align: center;
+				line-height: 24px;
+				color: #fff;
+				border-radius: 5px;
+			}
+			#wrapper{
+				background: #fff;
+				width: 100%;
+			}
+			
+			dl {
+				width: 100%;
+				overflow: hidden;
+				background: #fff
+			}
+			
+			dt,dd {
+				float: left;
+			}
+			
+			dt {
+				width: 20%;
+			}
+			
+			dt img {
+				width: 70%;
+				margin: 10px auto;
+				border-radius: 50%;
+			}
+			
+			dd {
+				width: 80%;
+				margin: 10px 0;
+			}
+			dd p {
+				font-size: 14px;
+				line-height: 24px;
+				text-align: left;
+			}
+			
+			dd p:nth-child(1) {
+				overflow: hidden;
+			}
+			
+			dd p:nth-child(2) {
+				color: #cfcfcf;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<span>个人中心</span>
+		</header>
+		<div class="search">
+			<input type="text" placeholder="请输入昵称" />
+			<input type="button" name="" id="" value="搜索" />
+		</div>
+		<dl class="dl">
+			<dt><img src="images/123.png"/></dt>
+			<dd>
+				<p><span>我叫小萌</span></p>
+				<p>我是小萌我怕谁!哈哈哈!</p>
+			</dd>
+		</dl>
+		<div class="nav">
+			<span class="active2">照片(1)</span>
+			<span>关注(2)</span>
+			<span>粉丝(3)</span>
+		</div>
+		<div class="swiper-container">
+			<div id="scroller" class="swiper-wrapper">
+				<div class="swiper-slide" id="wrapperA">
+					<img src="images/geren.jpg" />
+				</div>
+				<div class="swiper-slide" id="wrapperB">
+					<img src="images/guan.jpg" />
+				</div>
+				<div class="swiper-slide" id="wrapperC">
+					<img src="images/hot-1.jpg" />
+				</div>
+			</div>
+		</div>
+		<footer>
+			<a href="javascript:;">
+				<span class="iconfont">&#x3436;</span>
+				<br>
+				<span>首页</span>
+			</a>
+			<a href="javascript:;">
+				<span class="iconfont">&#xe649;</span>
+				<br>
+				<span>发现</span>
+			</a>
+			<a href="javascript:;">
+				<span class="iconfont">&#xe60e;</span>
+			</a>
+			<a class="active" href="javascript:;">
+				<span class="iconfont">&#xe64c;</span>
+				<br>
+				<span>我的</span>
+			</a>
+			<a href="javascript:;">
+				<span class="iconfont">&#xe638;</span>
+				<br>
+				<span>退出</span>
+			</a>
+
+		</footer>
+	</body>
+	<script src="js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="js/swiper-3.3.1.jquery.min.js"></script>
+	<script src="js/iscroll.js"></script>
+	<script type="text/javascript" src="js/swiper.animate1.0.2.min.js"></script>
+	<script type="text/javascript">
+		window.onload = function() {
+			var wHeight = $(window).height(),
+				hHeight = $("header").height(),
+				nHeight = $(".search").height(),
+				navHeight = $(".nav").height(),
+				dHeight = $(".dl").height(),
+				fHeight = $("footer").height(),
+				scrollA = new iScroll("wrapperA", {
+					hScrollbar: false,
+					vScrollbar: false,
+				});
+			$("#wrapperA").height(wHeight - hHeight -navHeight- dHeight - fHeight - nHeight - 10);
+			scrollA.refresh();
+				scrollB = new iScroll("wrapperB", {
+					hScrollbar: false,
+					vScrollbar: false,
+				});
+			$("#wrapperB").height(wHeight - hHeight -navHeight- dHeight - fHeight - nHeight - 10);
+			scrollB.refresh();
+				scrollC = new iScroll("wrapperC", {
+					hScrollbar: false,
+					vScrollbar: false,
+				});
+			$("#wrapperC").height(wHeight - hHeight -navHeight- dHeight - fHeight - nHeight - 10);
+			scrollC.refresh();
+		}
+			var mySwiper = new Swiper('.swiper-container', {
+				direction: 'horizontal',
+				loop: false,
+				onSlideChangeStart:function(swiper){
+					var index = swiper.activeIndex;
+					$('.nav span').eq(index).addClass('active2').siblings().removeClass('active2');
+				}
+			})
+			$('.nav span').click(function(){
+				var index = $(this).index();
+				$(this).addClass('active2').siblings().removeClass('active2');
+				mySwiper.slideTo(index,1000,false);
+			})
+			$.ajax({
+				type:"get",
+				url:"http://10.10.160.44:8080/Proxy/FootBall/user/json/userinfo.do",
+				data:{
+					"id":localStorage.getItem('id')
+				},
+				success:function(d){
+					var data = JSON.parse(d);
+					console.log(data);
+					$('.dl dt img').attr('src','http://101.200.173.217:8080/FootBall'+data.data.userinfo.avatarpath)
+					$('.dl dd p').find('span').html(data.data.userinfo.loginname);
+					$('.dl dd p').eq(1).html(data.data.userinfo.favoriteTeam)
+				}
+			});
+	</script>
+
+</html>

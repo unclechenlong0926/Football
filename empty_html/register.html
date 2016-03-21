@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>足球圈子-注册</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/common.css" />
+	</head>
+
+	<body>
+		<header>足球圈子-注册</header>
+		<div class="form">
+			<input id="uid" type="text" placeholder="手机号" />
+			<span></span>
+			<input id="pwd" type="password" placeholder="密码" />
+			<span></span>
+			<input id="nickname" type="text" placeholder="昵称" />
+			<span></span>
+			<span style="margin: 5px auto 5px;text-align: center;"></span>
+			<input class="btn btn1" type="button" value="注   册" />
+		</div>
+	</body>
+	<script src="js/zepto.min.js"></script>
+	<script>
+		$(function(){
+			var checkname = true,
+				checkpwd = true,
+				checknick = true,
+				uid = null,
+				pwd = null,
+				nickname = null,
+				userInfo = window.localStorage;
+				regname = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/,
+				regpwd = /^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,22}$/;//全数字,全字母,全特殊符号,三种或两种的组合,6~22位
+				$('#uid').blur(function(){
+					uid = $('#uid').val();
+					if(regname.test(uid)){
+						$('span').eq(0).html('');
+						return;
+					}else{
+						$('span').eq(0).html('手机号输入有误');
+						return checkname = false;
+					}	
+					
+				})
+				$('#pwd').blur(function(){
+					pwd = $('#pwd').val();
+					if(regpwd.test(pwd)){
+						$('span').eq(1).html('');
+						return;
+					}else{
+						$('span').eq(1).html('密码必须为6~22位数字或字母或特殊符号');
+						return checkpwd = false;
+					}	
+				})
+				$('#nickname').blur(function(){
+					nickname = $('#nickname').val();
+					if(nickname){
+						$('span').eq(2).html('');
+						return;
+					}else{
+						$('span').eq(2).html('昵称不能为空');
+						return checknick = false;
+					}	
+				})
+				$('.btn1').tap(function(e){
+					e.preventDefault();
+					if(checkname && checkpwd && checknick){
+						$.ajax({
+							url:'http://10.10.160.44:8080/Proxy/FootBall/user/json/reg.do',
+							data:{'loginname':uid,'password':pwd,'nickname':nickname},
+							success:function(d){
+								var data = JSON.parse(d);
+									console.log(data)
+								if(data.ecode==200){
+									location.href = 'login.html';
+								}else{
+									$('span').eq(3).html(data.errorinfo);
+								}
+							}
+						})
+					}
+				})
+			})
+				
+			
+	</script>
+</html>

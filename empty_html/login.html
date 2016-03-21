@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>足球圈子-登录</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <style type="text/css">
+    	p{
+    		margin: 5px auto 15px;
+    		text-align: center;
+    		height: 20px;
+    		font-size: 12px;
+    		color: red;
+    	}
+    </style>
+</head>
+<body>
+	<header>足球圈子-登录</header>
+	<div class="form">
+		<input id="uid" type="text" placeholder="手机号" />
+		<input id="pwd" type="password" placeholder="密码" />
+		<div class="links">
+			<a class="reg" href="register.html">注册</a>
+			<a class="pwd" href="forget.html">忘记密码</a>
+		</div>
+		<p></p>
+		<input class="btn" type="button" value="提  交" />
+	</div>
+	<script src="js/zepto.min.js"></script>
+	
+	<script>
+		$('.btn').on('tap',function(e){
+			e.preventDefault();
+			var uid = $('#uid').val(),
+				pwd = $('#pwd').val(),
+				regname = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/,
+				regpwd = /^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,22}$/,//全数字,全字母,全特殊符号,三种或两种的组合,6~22位
+				userinfo = window.localStorage;
+			if(regname.test(uid)&&regpwd.test(pwd)){
+				$.ajax({
+					url:'http://10.10.160.44:8080/Proxy/FootBall/user/json/login.do',
+					data:{'loginname':uid,'password':pwd},
+					success:function(d){
+						var data = JSON.parse(d);
+						console.log(data);
+						userinfo.setItem('id',JSON.stringify(data.data.loginuser.id));
+						/*console.log(userinfo.getItem('id'));*/
+						if(data.ecode==200){
+							location.href='hot.html';
+						}else{
+							$('p').html(data.errorinfo);
+						};
+						
+					}
+				})
+			}else{
+				$('p').html("手机号或密码有误,请重新输入");
+			}
+		})
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</body>
+</html>

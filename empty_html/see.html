@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>足球圈子-关注</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/hot.css" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<style type="text/css">
+			header a:nth-child(1) {
+				color: #b1e4f8;
+				background: #57b2d7;
+				border-bottom-left-radius: 16px;
+				border-top-left-radius: 16px;
+			}
+			
+			header a:nth-child(2) {
+				color: #b1e4f8;
+				background: #57b2d7;
+				color: #fff;
+				background: #79c1df;
+				border-top-right-radius: 16px;
+				border-bottom-right-radius: 16px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<a href="hot.html">热点</a>
+			<a href="javascript:;">关注</a>
+		</header>
+		<div id="wrapper">
+			<div id="scroller" class="page2">
+				<ul>
+					<li>
+						<dl>
+							<dt><img src="images/123.png"/></dt>
+							<dd>
+								<p><span>我叫小萌</span><span>382344<i>&#xe629;</i></span></p>
+								<p>我是小萌我怕谁!哈哈哈!</p>
+							</dd>
+						</dl>
+						<div>
+							<a href="javascript:;"><img src="images/1.png" /></a>
+							<p>小丸子啊小丸子</p>
+						</div>
+					</li>
+					<li>
+						<dl>
+							<dt><img src="images/123.png"/></dt>
+							<dd>
+								<p><span>我叫小萌</span><span>382344<i>&#xe629;</i></span></p>
+								<p>我是小萌我怕谁!哈哈哈!</p>
+							</dd>
+						</dl>
+						<div>
+							<a href="javascript:;"><img src="images/1.png" /></a>
+							<p>小丸子啊小丸子</p>
+						</div>
+					</li>
+					<li>
+						<dl>
+							<dt><img src="images/123.png"/></dt>
+							<dd>
+								<p><span>我叫小萌</span><span>382344<i>&#xe629;</i></span></p>
+								<p>我是小萌我怕谁!哈哈哈!</p>
+							</dd>
+						</dl>
+						<div>
+							<a href="javascript:;"><img src="images/1.png" /></a>
+							<p>小丸子啊小丸子</p>
+						</div>
+					</li>
+					<li>
+						<dl>
+							<dt><img src="images/123.png"/></dt>
+							<dd>
+								<p><span>我叫小萌</span><span>382344<i>&#xe629;</i></span></p>
+								<p>我是小萌我怕谁!哈哈哈!</p>
+							</dd>
+						</dl>
+						<div>
+							<a href="javascript:;"><img src="images/1.png" /></a>
+							<p>小丸子啊小丸子</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		</div>
+		<footer>
+			<a class="active" href="javascript:;">
+				<span class="iconfont">&#x3436;</span>
+				<br>
+				<span>首页</span>
+			</a>
+			<a href="javascript:;">
+				<span class="iconfont">&#xe649;</span>
+				<br>
+				<span>发现</span>
+			</a>
+			<a href="javascript:;">
+				<span class="iconfont">&#xe60e;</span>
+			</a>
+			<a href="javascript:;">
+				<span class="iconfont">&#xe64c;</span>
+				<br>
+				<span>我的</span>
+			</a>
+			<a href="javascript:;">
+				<span class="iconfont">&#xe638;</span>
+				<br>
+				<span>退出</span>
+			</a>
+
+		</footer>
+	</body>
+	<script src="js/jquery-1.11.3.js"></script>
+	<script src="js/iscroll.js"></script>
+	<script type="text/javascript">
+		window.onload = function() {
+			var wHeight = $(window).height(),
+				hHeight = $("header").height(),
+				nHeight = $(".nav").height(),
+				fHeight = $("footer").height(),
+				scroll = new iScroll("wrapper", {
+					hScrollbar: false,
+					vScrollbar: false,
+				});
+			$("#wrapper").height(wHeight - hHeight - fHeight - nHeight - 6);
+			scroll.refresh();
+			scroll.scrollTo(0, 0, 0, false);
+			$('header a').click(function() {
+				var index = $(this).index();
+				$(this).css({
+					'color': '#fff',
+					'background': '#79c1df'
+				}).siblings().css({
+					'color': '#b1e4f8',
+					'background': '#57b2d7'
+				})
+			})
+		}
+	</script>
+
+</html>
